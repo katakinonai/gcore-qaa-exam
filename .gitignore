@@ -1,0 +1,14 @@
+.env
+.venv
+.vscode
+.idea
+!.gitkeep
+*__pycache__*
+
+secret.*
+pytest_logs.txt
+.pytest_cache
+files/*
+/allure-reports/*
+/allure-results/*
+/tests/__pycache__
