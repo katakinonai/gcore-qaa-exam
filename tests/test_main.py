@@ -20,6 +20,7 @@ def test_login(driver):
     with allure.step("Check Base URL"):
         DriverUtils.get(Config.URLS["BASE_URL"], driver)
         assert BrowserUtils.get_url(driver) == Config.URLS["BASE_URL"]
+        assert login_page.is_page_open(driver)
 
     with allure.step("Check if email input is enabled"):
         assert login_page.is_email_input_clickable(driver)

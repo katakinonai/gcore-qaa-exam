@@ -11,5 +11,5 @@ class BasePage(object):
         self._name = name
 
     def is_page_open(self, driver):
-        logging.info(f"Check if the page '{self._name}' is open")
+        logging.info(f"Check if {self._name} is open")
         return self._uniqueElement.is_displayed(driver)
