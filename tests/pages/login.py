@@ -1,3 +1,4 @@
+import email
 import logging
 import os
 
@@ -13,6 +14,7 @@ load_dotenv()
 
 class LoginPage(BasePage):
     def __init__(self):
+        super().__init__("//input[@id='index_email']", "email input")
         self.email_input = Input("//input[@id='index_email']", "email input")
         self.password_input = Input("//input[@type='password']", "password input")
         self.email_submit_button = Button(
