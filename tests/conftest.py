@@ -6,7 +6,7 @@ from pytest import FixtureRequest
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
-from framework.utils.api_client import ApiClient
+from framework.utils.api.api_client import ApiClient
 from framework.utils.driver_utils import DriverUtils
 
 

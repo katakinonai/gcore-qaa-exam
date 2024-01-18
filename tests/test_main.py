@@ -4,7 +4,7 @@ import logging.config
 import allure
 
 from config import Config
-from framework.utils.browser_utils import BrowserUtils
+from framework.utils.browser.browser_utils import BrowserUtils
 from framework.utils.driver_utils import DriverUtils
 from tests.pages.login import LoginPage
 
