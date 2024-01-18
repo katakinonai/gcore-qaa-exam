@@ -1,7 +1,5 @@
 import logging
 
-from config import Config
-
 
 class DriverUtils:
     @staticmethod
