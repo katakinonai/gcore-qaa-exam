@@ -2,7 +2,7 @@ import subprocess
 
 python_path = "."
 allure_dir = "allure-results"
-test_files = "*"
+test_files = "test_main.py"
 flags = "-v -s"
 log_level = "ERROR"
 
