@@ -1,4 +1,3 @@
-import email
 import logging
 import os
 
