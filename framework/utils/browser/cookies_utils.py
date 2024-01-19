@@ -20,5 +20,5 @@ class CookiesUtils:
 
     @staticmethod
     def delete_all_cookies(driver):
-        logging.info(f"Delete all cookies")
+        logging.info("Delete all cookies")
         return driver.delete_all_cookies()
