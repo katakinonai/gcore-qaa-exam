@@ -98,13 +98,7 @@ class BaseElement:
             return el
         res = el.is_displayed()
         logging.info(
-            f"""{self._name
-                if res
-                else 'Element'}
-            is{' not'
-               if not res
-               else ''}
-            displayed"""
+            f"""{self._name if res else 'Element'} is{' not' if not res else ''} displayed"""
         )
         return res
 
