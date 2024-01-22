@@ -14,14 +14,15 @@ from tests.pages.login import LoginPage
 def test_login(driver):
     login_page = LoginPage(driver)
     driver_utils = DriverUtils(driver)
+    browser_utils = BrowserUtils(driver)
 
     logging.config.fileConfig("logging.conf")
     logging.info("Test Execution Started")
-    DriverUtils.maximize_window(driver)
+    driver_utils.maximize_window()
 
     with allure.step("Check Base URL"):
         driver_utils.get(Config.URLS["BASE_URL"])
-        assert BrowserUtils.get_url(driver) == Config.URLS["BASE_URL"]
+        assert browser_utils.get_url() == Config.URLS["BASE_URL"]
         assert login_page.is_page_open()
 
     with allure.step("Check if email input is enabled"):

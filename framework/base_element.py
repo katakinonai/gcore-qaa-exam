@@ -11,9 +11,10 @@ from config import Config
 
 
 class BaseElement:
-    def __init__(self, _locator: str, _name: str):
-        self._locator = _locator
-        self._name = _name
+    def __init__(self, driver, locator: str, name: str):
+        self._driver = driver
+        self._locator = locator
+        self._name = name
 
     def _find_element(self, driver) -> WebElement | str:
         if isinstance(self._locator, str):

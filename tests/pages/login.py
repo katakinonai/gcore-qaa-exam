@@ -19,10 +19,12 @@ class LoginPage(BasePage):
         self.email_input = Input("//input[@id='index_email']", "email input")
         self.password_input = Input("//input[@type='password']", "password input")
         self.email_submit_button = Button(
+            self._driver,
             "//button[contains(@class, 'VkIdForm__signInButton')]",
             "confirm email button",
         )
         self.password_submit_button = Button(
+            self._driver,
             "//button[contains(@class, 'vkuiButton')]",
             "confirm password button",
         )
