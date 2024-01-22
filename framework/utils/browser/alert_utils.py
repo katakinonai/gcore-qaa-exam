@@ -3,22 +3,21 @@ from selenium.webdriver.common.alert import Alert
 
 
 class AlertUtils:
-    @staticmethod
-    def accept_alert(driver) -> None:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+
+    def accept_alert(self) -> None:
         logging.info("Accept alert")
-        return Alert(driver).accept()
+        return Alert(self._driver).accept()
 
-    @staticmethod
-    def dismiss_alert(driver) -> None:
+    def dismiss_alert(self) -> None:
         logging.info("Dismiss alert")
-        return Alert(driver).dismiss()
+        return Alert(self._driver).dismiss()
 
-    @staticmethod
-    def get_alert_text(driver) -> str:
+    def get_alert_text(self) -> str:
         logging.info("Get alert text")
-        return Alert(driver).text
+        return Alert(self._driver).text
 
-    @staticmethod
-    def alert_send_keys(str, driver) -> None:
+    def alert_send_keys(self, str) -> None:
         logging.info(f'Send text to alert: "{str}"')
-        return Alert(driver).send_keys(str)
+        return Alert(self._driver).send_keys(str)
