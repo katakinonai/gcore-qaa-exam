@@ -4,6 +4,7 @@ import logging.config
 import allure
 
 from config import Config
+from framework.base_page import BasePage
 from framework.utils.browser.browser_utils import BrowserUtils
 from framework.utils.driver_utils import DriverUtils
 from tests.pages.login import LoginPage
@@ -11,8 +12,8 @@ from tests.pages.login import LoginPage
 
 @allure.feature("VK Automation Tests")
 @allure.title("Login page")
-def test_login(driver):
-    login_page = LoginPage(driver)
+def test_login(driver) -> None:
+    login_page: BasePage = LoginPage(driver)
     driver_utils = DriverUtils(driver)
     browser_utils = BrowserUtils(driver)
 

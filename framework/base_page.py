@@ -6,11 +6,11 @@ class BasePage(object):
     _uniqueElement: BaseElement
     _name: str
 
-    def __init__(self, driver, unique_element, name):
+    def __init__(self, driver, unique_element: BaseElement, name):
         self._driver = driver
-        self._uniqueElement = unique_element
-        self._name = name
+        self._uniqueElement: BaseElement = unique_element
+        self._name: str = name
 
-    def is_page_open(self):
+    def is_page_open(self) -> bool | str:
         logging.info(f"Check if {self._name} is open")
         return self._uniqueElement.is_displayed()

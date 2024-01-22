@@ -4,16 +4,16 @@ from typing import Any, Generator
 import pytest
 from pytest import FixtureRequest
 from selenium import webdriver
-from config import Config
 
+from config import Config
 from framework.utils.api.api_client import ApiClient
 from framework.utils.driver_utils import DriverUtils
 
 
 @pytest.fixture(scope="module")
-def driver():
+def driver() -> Generator:
     options = webdriver.ChromeOptions()
-    capabilities = {
+    capabilities: dict[str, bool] = {
         "enableVNC": True,
         "enableVideo": True,
     }

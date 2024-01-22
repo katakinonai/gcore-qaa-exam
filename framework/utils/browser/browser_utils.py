@@ -5,7 +5,7 @@ class BrowserUtils:
     def __init__(self, driver) -> None:
         self._driver = driver
 
-    def get_url(self):
+    def get_url(self) -> str | None:
         try:
             url = self._driver.current_url
             logging.info(f"Current url is equal to '{url}'")
@@ -13,7 +13,7 @@ class BrowserUtils:
         except:
             logging.error("Could not get current url")
 
-    def check_url(self, actual, expected):
+    def check_url(self, actual, expected) -> bool:
         if actual == expected:
             return True
         else:

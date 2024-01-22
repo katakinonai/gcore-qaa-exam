@@ -18,8 +18,10 @@ class BaseElement:
 
     def _find_element(self) -> WebElement | str:
         if isinstance(self._locator, str):
-            wait = WebDriverWait(self._driver, Config.TIMEOUT)
-            el = wait.until(EC.visibility_of_element_located((By.XPATH, self._locator)))
+            wait: WebDriverWait = WebDriverWait(self._driver, Config.TIMEOUT)
+            el: WebElement = wait.until(
+                EC.visibility_of_element_located((By.XPATH, self._locator))
+            )
             return el
         else:
             logging.error(f"Cannot find element {self._name}")
@@ -31,7 +33,7 @@ class BaseElement:
         return elements
 
     def get_elements_list(self, element_type: Type) -> list[WebElement]:
-        elements = self._find_elements()
+        elements: list[WebElement] = self._find_elements()
         elements_list = [
             element_type(el, f"{self._name} #{index}")
             for index, el in enumerate(elements)
@@ -40,25 +42,27 @@ class BaseElement:
 
     def is_clickable(self) -> WebElement | str:
         if isinstance(self._locator, str):
-            wait = WebDriverWait(self._driver, Config.TIMEOUT)
+            wait: WebDriverWait = WebDriverWait(self._driver, Config.TIMEOUT)
             logging.info(f"Check if {self._name} is clickable")
-            el = wait.until(EC.element_to_be_clickable((By.XPATH, self._locator)))
+            el: WebElement = wait.until(
+                EC.element_to_be_clickable((By.XPATH, self._locator))
+            )
             return el
         else:
             logging.error(f"Cannot find element {self._name}")
             return str(self._locator)
 
     def get_text(self) -> str:
-        el = self._find_element()
+        el: WebElement | str = self._find_element()
         if isinstance(el, str):
             logging.warning(f"Element '{self._name}' is not a WebElement but a string")
             return el
-        el_text = el.text
+        el_text: str = el.text
         logging.info(f"'{self._name}' text is equal to '{el_text}'")
         return el_text
 
     def click(self) -> None | str:
-        el = self._find_element()
+        el: WebElement | str = self._find_element()
         if isinstance(el, str):
             logging.warning(f"Element '{self._name}' is not a WebElement but a string")
             return el
@@ -66,11 +70,11 @@ class BaseElement:
         return el.click()
 
     def double_click(self) -> None | str:
-        el = self._find_element()
+        el: WebElement | str = self._find_element()
         if isinstance(el, str):
             logging.warning(f"Element '{self._name}' is not a WebElement but a string")
             return el
-        actions = ActionChains(self._driver)
+        actions: ActionChains = ActionChains(self._driver)
         logging.info(f"Double click 'f{self._name}'")
         return actions.double_click(el).perform()
 
@@ -103,7 +107,7 @@ class BaseElement:
         )
         return res
 
-    def wait_until_enabled(self):
+    def wait_until_enabled(self) -> WebElement:
         logging.info(f"Waiting for {self._name} to be enabled")
         return WebDriverWait(self._driver, Config.TIMEOUT).until(
             EC.element_to_be_clickable((By.XPATH, self._locator))
