@@ -2,23 +2,22 @@ import logging
 
 
 class CookiesUtils:
-    @staticmethod
-    def add_cookie(name, value, driver):
+    def __init__(self, driver) -> None:
+        self._driver = driver
+
+    def add_cookie(self, name, value):
         logging.info(f"Set cookie: {name}")
         cookie = {"name": name, "value": value}
-        return driver.add_cookie(cookie)
+        return self._driver.add_cookie(cookie)
 
-    @staticmethod
-    def get_cookies(driver, names=None):
+    def get_cookies(self, names=None):
         logging.info(f"Get cookies: {names}")
-        return driver.get_cookies(names)
+        return self._driver.get_cookies(names)
 
-    @staticmethod
-    def delete_cookies(names, driver):
+    def delete_cookies(self, names):
         logging.info(f"Delete cookies: {names}")
-        return driver.delete_cookies(names)
+        return self._driver.delete_cookies(names)
 
-    @staticmethod
-    def delete_all_cookies(driver):
+    def delete_all_cookies(self):
         logging.info("Delete all cookies")
-        return driver.delete_all_cookies()
+        return self._driver.delete_all_cookies()
