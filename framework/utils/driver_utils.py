@@ -2,27 +2,25 @@ import logging
 
 
 class DriverUtils:
-    @staticmethod
-    def get(url, driver):
+    def __init__(self, driver) -> None:
+        self._driver = driver
+
+    def get(self, url):
         logging.info(f"Open URL: '{url}'")
-        return driver.get(url)
+        return self._driver.get(url)
 
-    @staticmethod
-    def maximize_window(driver):
+    def maximize_window(self):
         logging.info("Maximize window")
-        return driver.maximize_window()
+        return self._driver.maximize_window()
 
-    @staticmethod
-    def implicitly_wait(time, driver):
+    def implicitly_wait(self, time):
         logging.info(f"Implicitly wait for {time} seconds")
-        return driver.implicitly_wait(time)
+        return self._driver.implicitly_wait(time)
 
-    @staticmethod
-    def close(driver):
+    def close(self):
         logging.info("Close the driver")
-        return driver.close()
+        return self._driver.close()
 
-    @staticmethod
-    def quit(driver):
+    def quit(self):
         logging.info("Quit the driver")
-        return driver.quit()
+        return self._driver.quit()

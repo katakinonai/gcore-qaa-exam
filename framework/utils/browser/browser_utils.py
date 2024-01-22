@@ -2,17 +2,18 @@ import logging
 
 
 class BrowserUtils:
-    @staticmethod
-    def get_url(driver):
+    def __init__(self, driver) -> None:
+        self._driver = driver
+
+    def get_url(self):
         try:
-            url = driver.current_url
+            url = self._driver.current_url
             logging.info(f"Current url is equal to '{url}'")
             return url
         except:
             logging.error("Could not get current url")
 
-    @staticmethod
-    def check_url(actual, expected, driver):
+    def check_url(self, actual, expected):
         if actual == expected:
             return True
         else:

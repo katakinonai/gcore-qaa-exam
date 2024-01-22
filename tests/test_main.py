@@ -13,12 +13,14 @@ from tests.pages.login import LoginPage
 @allure.title("Login page")
 def test_login(driver):
     login_page = LoginPage(driver)
+    driver_utils = DriverUtils(driver)
+
     logging.config.fileConfig("logging.conf")
     logging.info("Test Execution Started")
     DriverUtils.maximize_window(driver)
 
     with allure.step("Check Base URL"):
-        DriverUtils.get(Config.URLS["BASE_URL"], driver)
+        driver_utils.get(Config.URLS["BASE_URL"])
         assert BrowserUtils.get_url(driver) == Config.URLS["BASE_URL"]
         assert login_page.is_page_open()
 
