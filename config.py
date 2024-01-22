@@ -14,3 +14,7 @@ class Config:
         "group_name": "QAA City game",
         "message": "привет",
     }
+
+    COMMAND_EXECUTOR: str = "http://localhost:4444/wd/hub"
+
+    LOG_FILE: str = "pytest_logs.txt"
