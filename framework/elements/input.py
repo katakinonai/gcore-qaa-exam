@@ -1,4 +1,5 @@
 import logging
+import os
 
 from framework.base_element import BaseElement
 
@@ -18,3 +19,7 @@ class Input(BaseElement):
         logging.info(f"Setting {self._name} to a secret value of '{len(value) * '*'}'")
         if not isinstance(el, str):
             return el.send_keys(value)
+
+    def upload_file(self, file_path: str) -> None:
+        logging.info(f"Upload {file_path} to {self._name}")
+        return self.set_value(os.getcwd() + file_path)
