@@ -1,7 +1,10 @@
 import logging
-import os
+
+from selenium.webdriver.remote.file_detector import LocalFileDetector
 
 from framework.base_element import BaseElement
+
+# import os
 
 
 class Input(BaseElement):
@@ -22,4 +25,7 @@ class Input(BaseElement):
 
     def upload_file(self, file_path: str) -> None:
         logging.info(f"Upload {file_path} to {self._name}")
-        return self.set_value(os.getcwd() + file_path)
+        # return self.set_value(os.getcwd() + file_path)
+        self._driver.execute_script("arguments[0].style.display = 'block';", self)
+        self._driver.file_detector = LocalFileDetector()
+        return self.set_value(file_path)  # REFERENCE: https://shorturl.at/lrOP7
