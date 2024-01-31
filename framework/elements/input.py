@@ -11,10 +11,17 @@ class Input(BaseElement):
     def __init__(self, _driver, _locator: str, _name: str):
         super().__init__(_driver, _locator, _name)
 
+    def clear(self):
+        el = self._find_element()
+        logging.info(f"Clear value of {self._name}")
+        if not isinstance(el, str):
+            return el.clear()
+
     def set_value(self, value):
         el = self._find_element()
         logging.info(f"Set {self._name} to a value of '{value}'")
         if not isinstance(el, str):
+            el.click()
             return el.send_keys(value)
 
     def set_value_secret(self, value):

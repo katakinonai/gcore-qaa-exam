@@ -8,7 +8,10 @@ class Config:
 
     TIMEOUT: int = 10
 
-    DATA: dict[str, str] = {}
+    DATA: dict = {
+        "MIN_PRICE": "400",
+        "MAX_PRICE": "800",
+    }
 
     COMMAND_EXECUTOR: str = "http://localhost:4444"
 

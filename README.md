@@ -6,7 +6,7 @@ Need to create automated test to check Server configuration calculator using ste
 
 ### Steps
 1. Go to https://gcore.com/hosting
-2. Chooses servers type Dedicated/Virtual
+2. Choose servers type Dedicated/Virtual
 3. Choose the currency
 4. Enter price min and max values
 5. Assert search result contains:
