@@ -2,9 +2,9 @@
 
 Selenoid template with usage of Pytest and Allure.
 
-## Secrets
+## Credentials
 
-Secrets must be put in `.env` file in the format:
+Secrets must be put in `.env` file:
 
 ```python
 EMAIL = "email"
@@ -38,19 +38,20 @@ Run one command to start Selenoid:
 ```bash
 $ ./cm selenoid start --vnc
 ```
-Running this command with sudo can lead to broken installation. Recommended way is running Selenoid as regular user. On Linux to have permissions to access Docker you may need to add your user to docker group:
-```bash
-$ sudo usermod -aG docker $USER
-```
-Optionally run one more command to start Selenoid UI:
+
+And to start Selenoid UI (**OPTIONAL**):
 ```bash
 $ ./cm selenoid-ui start
 ```
-Open `http://localhost:8080/#/` to view Selenoid UI.
-## Command to run tests:
-```sh
-PYTHONPATH=. python tests/main.py
+
+Running these commands with sudo can lead to broken installation. Recommended way is running Selenoid as regular user. On Linux to have permissions to access Docker you may need to add your user to docker group:
+```bash
+$ sudo usermod -aG docker $USER
 ```
+
+See documentation here:
+
+- https://aerokube.com/selenoid/latest/
 
 ### Allure
 Execute Allure Docker Service from this directory
@@ -69,17 +70,17 @@ On *NIX, give permissions to create reports in folders:
 chmod -R 777 allure-reports/ allure-results/
 ```
 
-Execute tests:
-```sh
-pytest tests/*.py --alluredir="allure-results"
-```
-or:
-
-```sh
-./test.sh
-```
-
 See documentation here:
 - https://github.com/fescobar/allure-docker-service
 - https://github.com/fescobar/allure-docker-service-ui
 
+## Command to run tests
+Run in terminal:
+```sh
+PYTHONPATH=. pytest -v -s tests/main.py --alluredir="allure-results"
+```
+Or, you can run `run_test.py` to execute the test files:
+
+```sh
+./run_test.py
+```
