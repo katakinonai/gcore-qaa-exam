@@ -13,12 +13,6 @@ from framework.utils.driver_utils import DriverUtils
 @pytest.fixture(scope="module")
 def driver() -> Generator:
     options = webdriver.ChromeOptions()
-    capabilities: dict[str, bool] = {
-        "enableVNC": True,
-        "enableVideo": True,
-    }
-    options.set_capability("selenoid:options", capabilities)
-
     driver = webdriver.Remote(command_executor=Config.COMMAND_EXECUTOR, options=options)
     driver_utils = DriverUtils(driver)
     yield driver

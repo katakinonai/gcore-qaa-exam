@@ -1,6 +1,17 @@
-# Selenoid Template 
+# Gcore QAA Selenium Test
 
-Selenoid template with usage of Pytest and Allure.
+## Task: Automated test for hosting calculator.
+
+Need to create automated test to check Server configuration calculator using steps described below using technologies - Python 3.9+, Selenium, Pytest, Docker. Test should be executed using Docker (Python code should be containerised). Result should be uploaded to your GitHub account. The repository has to contain the README.md file with comprehensive explanation of how to execute the test.
+
+### Steps
+1. Go to https://gcore.com/hosting
+2. Chooses servers type Dedicated/Virtual
+3. Choose the currency
+4. Enter price min and max values
+5. Assert search result contains:
+    - Servers with price between min and max values entered at step 4
+    - Server price currency is equal to currency chosen at step 3
 
 ## Credentials
 
@@ -27,31 +38,12 @@ python3 --version
 pip3 install -r requirements.txt
  ```
 
-### Selenoid
-1. Make sure you have recent Docker version installed.
-2. Download [Configuration Manager](http://aerokube.com/cm/latest/) (Selenoid quick installation binary) for your platform from releases page.
-3. On Linux or Mac give execution permissions to binary:
-```bash
-$ chmod +x cm
-```
-Run one command to start Selenoid:
-```bash
-$ ./cm selenoid start --vnc
-```
+### Selenium
+Run standalone Chrome driver in Docker:
 
-And to start Selenoid UI (**OPTIONAL**):
-```bash
-$ ./cm selenoid-ui start
 ```
-
-Running these commands with sudo can lead to broken installation. Recommended way is running Selenoid as regular user. On Linux to have permissions to access Docker you may need to add your user to docker group:
-```bash
-$ sudo usermod -aG docker $USER
+docker run -d -p 4444:4444 --shm-size="2g" selenium/standalone-chrome:4.17.0-20240123
 ```
-
-See documentation here:
-
-- https://aerokube.com/selenoid/latest/
 
 ### Allure
 Execute Allure Docker Service from this directory
