@@ -1,34 +1,6 @@
 version: '3'
 
 services:
-  allure:
-    image: "frankescobar/allure-docker-service"
-    environment:
-      CHECK_RESULTS_EVERY_SECONDS: 1
-      KEEP_HISTORY: 1
-    ports:
-      - "5050:5050"
-    volumes:
-      - allure_results:/app/allure-results
-      - allure_report:/app/allure-report
-      - allure_projects:/app/projects
-
-  allure-ui:
-    image: "frankescobar/allure-docker-service-ui"
-    environment:
-      ALLURE_DOCKER_PUBLIC_API_URL: "http://localhost:5050"
-      ALLURE_DOCKER_PUBLIC_API_URL_PREFIX: ""
-    ports:
-      - "5252:5252"
-
-  selenium-hub:
-    image: selenium/hub:4.17.0-20240123
-    container_name: selenium-hub
-    ports:
-      - "4442:4442"
-      - "4443:4443"
-      - "4444:4444"
-
   chrome:
     image: selenium/standalone-chrome:4.17.0-20240123
     shm_size: 2gb
@@ -39,14 +11,40 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
 
+  selenium-hub:
+    image: selenium/hub:4.17.0-20240123
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  allure:
+    image: "frankescobar/allure-docker-service"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 1
+      KEEP_HISTORY: 1
+    ports:
+      - "5050:5050"
+    volumes:
+      - allure_results:/app/allure-results
+      - allure_report:/app/default-reports
+
+  allure-ui:
+    image: "frankescobar/allure-docker-service-ui"
+    environment:
+      ALLURE_DOCKER_PUBLIC_API_URL: "http://localhost:5050"
+      ALLURE_DOCKER_PUBLIC_API_URL_PREFIX: ""
+    ports:
+      - "5252:5252"
+
   testapp:
     image: "qaa_exam"
     volumes:
       - ${PWD}:/qaa_exam
       - allure_results:/qaa_exam/allure-results
-    command: "tests/*.py"
+    command: ["tests/test_hosting_positive.py", "tests/test_hosting_negative.py"]
 
 volumes:
-  allure_projects:
   allure_report:
   allure_results:

@@ -1,16 +1,12 @@
 import logging
 
 import regex
-from dotenv import load_dotenv
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.remote.webelement import WebElement
 
 from framework.base_page import BasePage
 from framework.elements.button import Button
 from framework.elements.input import Input
 from framework.elements.label import Label
-
-load_dotenv()
 
 
 class HostingPage(BasePage):
