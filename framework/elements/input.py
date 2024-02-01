@@ -21,7 +21,6 @@ class Input(BaseElement):
         el = self._find_element()
         logging.info(f"Set {self._name} to a value of '{value}'")
         if not isinstance(el, str):
-            el.click()
             return el.send_keys(value)
 
     def set_value_secret(self, value):

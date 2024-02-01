@@ -48,6 +48,8 @@ def test_hosting(driver) -> None:
     with allure.step("Step 5: Assert search result contains"):
         hosting_page.click_show_more_btn()
         prices = hosting_page.get_all_prices()
-        hosting_page.check_prices(
+        assert hosting_page.check_prices(
             prices, Config.DATA["MIN_PRICE"], Config.DATA["MAX_PRICE"]
         )
+        currencies = hosting_page.get_all_currencies()
+        assert hosting_page.check_currencies(currencies, "$")

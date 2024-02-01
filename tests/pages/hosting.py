@@ -1,6 +1,6 @@
 import logging
-import os
 import re
+import regex
 
 from dotenv import load_dotenv
 from selenium.webdriver.remote.webelement import WebElement
@@ -115,11 +115,30 @@ class HostingPage(BasePage):
             prices.append(price)
         return prices
 
+    def get_all_currencies(self):
+        els = self.price_card_label._find_elements()
+        logging.info("Get all currencies from cards")
+        curs = []
+        for idx, el in enumerate(els):
+            cur = regex.findall(r"\p{Sc}", el.text)[0]
+            logging.info(f"Currency of card number {idx+1} is equal to {cur}")
+            curs.append(cur)
+        return curs
+
     def check_prices(self, prices, min, max):
         for idx, price in enumerate(prices):
             logging.info(
                 f"Check if price of card number {idx+1} is in boundaries: {min} <= {price} <= {max}"
             )
             if int(max) <= price and price <= int(min):
+                return False
+        return True
+
+    def check_currencies(self, curs, expected_cur):
+        for idx, cur in enumerate(curs):
+            logging.info(
+                f"Check if currency of card number {idx+1} is equal to: {expected_cur}"
+            )
+            if cur != expected_cur:
                 return False
         return True
