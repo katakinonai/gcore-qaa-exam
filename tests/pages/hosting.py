@@ -78,6 +78,18 @@ class HostingPage(BasePage):
             "show more button",
         )
 
+        self.out_of_range_min_lbl = Label(
+            driver,
+            "(//p[contains(@class, 'gc-input-validation')])[1]",
+            "min out of range label",
+        )
+
+        self.out_of_range_max_lbl = Label(
+            driver,
+            "(//p[contains(@class, 'gc-input-validation')])[2]",
+            "max out of range label",
+        )
+
     def click_dedicated_servers_btn(self):
         return self.dedicated_servers_btn.click()
 
@@ -98,6 +110,12 @@ class HostingPage(BasePage):
 
     def is_usd_label_active(self):
         return self.usd_label_active.is_displayed()
+
+    def is_out_of_range_min_displayed(self):
+        return self.out_of_range_min_lbl.is_displayed()
+
+    def is_out_of_range_max_displayed(self):
+        return self.out_of_range_max_lbl.is_displayed()
 
     def clear_min_price(self):
         return self.min_price_input.clear()

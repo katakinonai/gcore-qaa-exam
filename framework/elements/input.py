@@ -1,10 +1,9 @@
 import logging
 
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.file_detector import LocalFileDetector
 
 from framework.base_element import BaseElement
-
-# import os
 
 
 class Input(BaseElement):
@@ -13,9 +12,10 @@ class Input(BaseElement):
 
     def clear(self):
         el = self._find_element()
-        logging.info(f"Clear value of {self._name}")
         if not isinstance(el, str):
-            return el.clear()
+            logging.info(f"Clear value of {self._name}")
+            el.send_keys(Keys.CONTROL + "a")
+            return el.send_keys(Keys.DELETE)
 
     def set_value(self, value):
         el = self._find_element()
