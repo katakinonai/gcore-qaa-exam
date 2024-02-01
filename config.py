@@ -9,10 +9,14 @@ class Config:
     TIMEOUT: int = 10
 
     DATA: dict = {
-        "MIN_PRICE_1": "400",
-        "MAX_PRICE_1": "800",
-        "MIN_PRICE_2": "89",
-        "MAX_PRICE_2": "1482",
+        "MIN_PRICE_1": "3",
+        "MAX_PRICE_1": "117",
+        "MIN_PRICE_2": "3",
+        "MAX_PRICE_2": "97",
+        "MIN_PRICE_3": "93",
+        "MAX_PRICE_3": "1724",
+        "MIN_PRICE_4": "93",
+        "MAX_PRICE_4": "1482",
         "CURRENCY_USD": "$",
         "CURRENCY_EUR": "€",
         "SERVER_TYPE_1": "virtual",

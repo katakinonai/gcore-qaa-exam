@@ -23,10 +23,22 @@ from tests.pages.hosting import HostingPage
             Config.DATA["MAX_PRICE_1"],
         ),
         (
-            Config.DATA["SERVER_TYPE_2"],
+            Config.DATA["SERVER_TYPE_1"],
             Config.DATA["CURRENCY_EUR"],
             Config.DATA["MIN_PRICE_2"],
             Config.DATA["MAX_PRICE_2"],
+        ),
+        (
+            Config.DATA["SERVER_TYPE_2"],
+            Config.DATA["CURRENCY_USD"],
+            Config.DATA["MIN_PRICE_3"],
+            Config.DATA["MAX_PRICE_3"],
+        ),
+        (
+            Config.DATA["SERVER_TYPE_2"],
+            Config.DATA["CURRENCY_EUR"],
+            Config.DATA["MIN_PRICE_4"],
+            Config.DATA["MAX_PRICE_4"],
         ),
     ],
 )
