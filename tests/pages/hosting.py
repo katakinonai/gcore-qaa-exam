@@ -67,11 +67,20 @@ class HostingPage(BasePage):
             driver, "//div[@class='price-card_price']", "price card label"
         )
 
+        self.show_more_btn = Button(
+            driver,
+            "//div[contains(@class, 'gc-server-configurator-more')]",
+            "show more button",
+        )
+
     def click_dedicated_servers_btn(self):
         return self.dedicated_servers_btn.click()
 
     def click_currency_switch(self):
         return self.currency_switch.click()
+
+    def click_show_more_btn(self):
+        return self.show_more_btn.click()
 
     def is_dedicated_active(self):
         return self.dedicated_servers_btn_active.is_displayed()
@@ -101,7 +110,16 @@ class HostingPage(BasePage):
         for idx, el in enumerate(els):
             price = int(re.findall(r"[-+]?\d*\.\d+|\d+", el.text)[0])
             logging.info(
-                f"Price of card number {idx} is equal to {price}"
+                f"Price of card number {idx+1} is equal to {price}"
             )  # ADD CUR VALUE HERE
             prices.append(price)
         return prices
+
+    def check_prices(self, prices, min, max):
+        for idx, price in enumerate(prices):
+            logging.info(
+                f"Check if price of card number {idx+1} is in boundaries: {min} <= {price} <= {max}"
+            )
+            if int(max) <= price and price <= int(min):
+                return False
+        return True
