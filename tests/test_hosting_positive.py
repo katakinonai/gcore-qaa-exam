@@ -40,6 +40,30 @@ from tests.pages.hosting import HostingPage
             Config.DATA["MIN_PRICE_4"],
             Config.DATA["MAX_PRICE_4"],
         ),
+        (
+            Config.DATA["SERVER_TYPE_1"],
+            Config.DATA["CURRENCY_USD"],
+            Config.DATA["MIN_PRICE_5"],
+            Config.DATA["MAX_PRICE_5"],
+        ),
+        (
+            Config.DATA["SERVER_TYPE_1"],
+            Config.DATA["CURRENCY_EUR"],
+            Config.DATA["MIN_PRICE_6"],
+            Config.DATA["MAX_PRICE_6"],
+        ),
+        (
+            Config.DATA["SERVER_TYPE_2"],
+            Config.DATA["CURRENCY_USD"],
+            Config.DATA["MIN_PRICE_7"],
+            Config.DATA["MAX_PRICE_7"],
+        ),
+        (
+            Config.DATA["SERVER_TYPE_2"],
+            Config.DATA["CURRENCY_EUR"],
+            Config.DATA["MIN_PRICE_8"],
+            Config.DATA["MAX_PRICE_8"],
+        ),
     ],
 )
 def test_hosting_positive(driver, server_type, currency, min_price, max_price) -> None:
