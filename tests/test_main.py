@@ -2,22 +2,38 @@ import logging
 import logging.config
 
 import allure
+import pytest
 
 from config import Config
 from framework.base_page import BasePage
 from framework.utils.browser.browser_utils import BrowserUtils
 from framework.utils.driver_utils import DriverUtils
-from framework.utils.wait_utils import WaitUtils
 from tests.pages.hosting import HostingPage
-from tests.pages.login import LoginPage
 
 
 @allure.feature("Gcore QAA Exam")
 @allure.title("Hosting Page")
-def test_hosting(driver) -> None:
-    hosting_page: BasePage = HostingPage(driver)
+@pytest.mark.parametrize(
+    "server_type,currency,min_price,max_price",
+    [
+        (
+            Config.DATA["SERVER_TYPE_1"],
+            Config.DATA["CURRENCY_USD"],
+            Config.DATA["MIN_PRICE_1"],
+            Config.DATA["MAX_PRICE_1"],
+        ),
+        (
+            Config.DATA["SERVER_TYPE_2"],
+            Config.DATA["CURRENCY_EUR"],
+            Config.DATA["MIN_PRICE_2"],
+            Config.DATA["MAX_PRICE_2"],
+        ),
+    ],
+)
+def test_hosting(driver, server_type, currency, min_price, max_price) -> None:
     driver_utils = DriverUtils(driver)
     browser_utils = BrowserUtils(driver)
+    hosting_page: BasePage = HostingPage(driver)
 
     logging.config.fileConfig("logging.conf")
     logging.info("Test Execution Started")
@@ -29,27 +45,33 @@ def test_hosting(driver) -> None:
         assert hosting_page.is_page_open()
 
     with allure.step("Step 2: Choose servers type Dedicated/Virtual"):
-        hosting_page.click_dedicated_servers_btn()
-        assert hosting_page.is_dedicated_active()
+        if server_type == Config.DATA["SERVER_TYPE_2"]:
+            hosting_page.click_dedicated_servers_btn()
+            assert hosting_page.is_dedicated_active()
+        else:
+            assert hosting_page.is_virtual_active()
 
     with allure.step("Step 3: Choose the currency"):
         assert hosting_page.is_eur_label_active()
-        hosting_page.click_currency_switch()
-        # assert hosting_page.is_usd_label_active()
+        if currency == Config.DATA["CURRENCY_USD"]:
+            hosting_page.click_currency_switch()
+            # assert hosting_page.is_usd_label_active()
 
     with allure.step("Step 4: Enter price min and max values"):
         assert hosting_page.min_price_input.is_clickable()
         hosting_page.clear_min_price()
-        hosting_page.set_min_price(Config.DATA["MIN_PRICE"])
+        hosting_page.set_min_price(min_price)
         assert hosting_page.max_price_input.is_clickable()
         hosting_page.clear_max_price()
-        hosting_page.set_max_price(Config.DATA["MAX_PRICE"])
+        hosting_page.set_max_price(max_price)
 
     with allure.step("Step 5: Assert search result contains"):
         hosting_page.click_show_more_btn()
-        prices = hosting_page.get_all_prices()
-        assert hosting_page.check_prices(
-            prices, Config.DATA["MIN_PRICE"], Config.DATA["MAX_PRICE"]
-        )
-        currencies = hosting_page.get_all_currencies()
-        assert hosting_page.check_currencies(currencies, "$")
+        with allure.step(
+            "Servers with price between min and max values entered at step 4"
+        ):
+            prices = hosting_page.get_all_prices()
+            assert hosting_page.check_prices(prices, min_price, max_price)
+        with allure.step("Server price currency is equal to currency chosen at step 3"):
+            currencies = hosting_page.get_all_currencies()
+            assert hosting_page.check_currencies(currencies, currency)

@@ -9,8 +9,14 @@ class Config:
     TIMEOUT: int = 10
 
     DATA: dict = {
-        "MIN_PRICE": "400",
-        "MAX_PRICE": "800",
+        "MIN_PRICE_1": "400",
+        "MAX_PRICE_1": "800",
+        "MIN_PRICE_2": "89",
+        "MAX_PRICE_2": "1482",
+        "CURRENCY_USD": "$",
+        "CURRENCY_EUR": "€",
+        "SERVER_TYPE_1": "virtual",
+        "SERVER_TYPE_2": "dedicated",
     }
 
     COMMAND_EXECUTOR: str = "http://localhost:4444"

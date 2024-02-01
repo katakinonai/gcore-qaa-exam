@@ -1,5 +1,4 @@
 import logging
-import re
 import regex
 
 from dotenv import load_dotenv
@@ -33,6 +32,12 @@ class HostingPage(BasePage):
             driver,
             "//button[@type='button' and contains(text(), 'Dedicated servers') and contains(@class, 'active')]",
             "active dedicated servers button",
+        )
+
+        self.virtual_servers_btn_active = Button(
+            driver,
+            "//button[@type='button' and contains(text(), 'Virtual servers') and contains(@class, 'active')]",
+            "active virtual servers button",
         )
 
         self.currency_switch = Button(
@@ -85,6 +90,9 @@ class HostingPage(BasePage):
     def is_dedicated_active(self):
         return self.dedicated_servers_btn_active.is_displayed()
 
+    def is_virtual_active(self):
+        return self.virtual_servers_btn_active.is_displayed()
+
     def is_eur_label_active(self):
         return self.eur_label_active.is_displayed()
 
@@ -108,10 +116,8 @@ class HostingPage(BasePage):
         logging.info("Get all prices from cards")
         prices = []
         for idx, el in enumerate(els):
-            price = int(re.findall(r"[-+]?\d*\.\d+|\d+", el.text)[0])
-            logging.info(
-                f"Price of card number {idx+1} is equal to {price}"
-            )  # ADD CUR VALUE HERE
+            price = float(regex.findall(r"[-+]?\d*\.\d+|\d+", el.text)[0])
+            logging.info(f"Price of card number {idx+1} is equal to {price}")
             prices.append(price)
         return prices
 
@@ -130,7 +136,7 @@ class HostingPage(BasePage):
             logging.info(
                 f"Check if price of card number {idx+1} is in boundaries: {min} <= {price} <= {max}"
             )
-            if int(max) <= price and price <= int(min):
+            if float(max) <= price and price <= float(min):
                 return False
         return True
 
