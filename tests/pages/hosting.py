@@ -59,13 +59,13 @@ class HostingPage(BasePage):
 
         self.min_price_input = Input(
             driver,
-            "(//input[contains(@class, 'gc-input')])[1]",
+            "(//input[@type='number' and contains(@class, 'gc-input')])[1]",
             "min price input field",
         )
 
         self.max_price_input = Input(
             driver,
-            "(//input[contains(@class, 'gc-input')])[2]",
+            "(//input[@type='number' and contains(@class, 'gc-input')])[2]",
             "max price input field",
         )
 
