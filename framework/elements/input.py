@@ -14,8 +14,7 @@ class Input(BaseElement):
         el = self._find_element()
         if not isinstance(el, str):
             logging.info(f"Clear value of {self._name}")
-            el.send_keys(Keys.CONTROL + "a")
-            return el.send_keys(Keys.DELETE)
+            return el.clear()
 
     def set_value(self, value):
         el = self._find_element()

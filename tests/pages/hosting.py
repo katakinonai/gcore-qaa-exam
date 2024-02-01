@@ -1,7 +1,8 @@
 import logging
-import regex
 
+import regex
 from dotenv import load_dotenv
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 
 from framework.base_page import BasePage
@@ -124,9 +125,11 @@ class HostingPage(BasePage):
         return self.max_price_input.clear()
 
     def set_min_price(self, price):
+        self.min_price_input.set_value(Keys.CONTROL + "a")
         return self.min_price_input.set_value(price)
 
     def set_max_price(self, price):
+        self.min_price_input.set_value(Keys.CONTROL + "a")
         return self.max_price_input.set_value(price)
 
     def get_all_prices(self):

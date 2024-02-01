@@ -69,7 +69,7 @@ See documentation here:
 ## Command to run tests
 Run in terminal:
 ```sh
-PYTHONPATH=. pytest -v -s tests/main.py --alluredir="allure-results"
+PYTHONPATH=. pytest -v -s tests/test_main.py --alluredir="allure-results"
 ```
 Or, you can run `run_test.py` to execute the test files:
 

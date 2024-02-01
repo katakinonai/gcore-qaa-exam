@@ -6,7 +6,7 @@ class Config:
         "NOT_FOUND_PLURAL": "Can't find elements by locator {locator}",
     }
 
-    TIMEOUT: int = 20
+    TIMEOUT: int = 10
 
     DATA: dict = {
         "MIN_PRICE_1": "3",

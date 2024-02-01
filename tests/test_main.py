@@ -69,7 +69,6 @@ def test_hosting_positive(driver, server_type, currency, min_price, max_price) -
         assert hosting_page.is_eur_label_active()
         if currency == Config.DATA["CURRENCY_USD"]:
             hosting_page.click_currency_switch()
-            # assert hosting_page.is_usd_label_active()
 
     with allure.step("Step 4: Enter price min and max values"):
         assert hosting_page.min_price_input.is_clickable()
