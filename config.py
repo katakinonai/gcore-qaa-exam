@@ -39,6 +39,6 @@ class Config:
         "SERVER_TYPE_2": "dedicated",
     }
 
-    COMMAND_EXECUTOR: str = "http://localhost:4444"
+    COMMAND_EXECUTOR: str = "http://chrome:4444"
 
     LOG_FILE: str = "pytest_logs.txt"
